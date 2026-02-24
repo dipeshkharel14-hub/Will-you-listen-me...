@@ -1,0 +1,211 @@
+<script>
+
+/* Atmosphere Glow */
+function createParticle() {
+    const p = document.createElement("div");
+    p.className = "particle";
+    p.style.left = Math.random()*100 + "vw";
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 6000);
+}
+setInterval(createParticle, 100);
+
+/* Fireworks 🎆 */
+function fireworkBurst() {
+    for(let i=0;i<25;i++) {
+        const f = document.createElement("div");
+        f.className = "firework";
+
+        f.style.left = Math.random()*100 + "vw";
+        f.style.top = Math.random()*100 + "vh";
+
+        f.style.setProperty('--x', `${Math.random()*200-100}px`);
+        f.style.setProperty('--y', `${Math.random()*200-100}px`);
+
+        document.body.appendChild(f);
+        setTimeout(() => f.remove(), 1000);
+    }
+}
+
+/* Floating Love */
+function floatLove() {
+    const el = document.createElement("div");
+    el.className = "float";
+    el.innerHTML = ["💖","🌹","✨","💕"][Math.floor(Math.random()*4)];
+    el.style.left = Math.random()*100 + "vw";
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 4000);
+}
+
+/* YES CLICK — FINAL BOSS 😌🔥 */
+function yesClick() {
+
+    // Play the romantic ambient music in the current window too (optional, already there)
+    document.getElementById("music").play();
+
+    setInterval(floatLove, 120);
+    setInterval(fireworkBurst, 900);
+
+    const win = window.open("", "_blank");
+
+    win.document.write(`
+    <html>
+    <head>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: radial-gradient(circle, #ff8fa3, #ff4d6d);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        color: white;
+        font-family: 'Great Vibes', cursive;
+    }
+
+    .container {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+    }
+
+    .side {
+        font-size: 28px;
+        animation: sway 3s ease-in-out infinite;
+    }
+
+    @keyframes sway { 50% { transform: translateY(-12px); } }
+
+    .poem {
+        font-size: 30px;
+        max-width: 520px;
+        line-height: 1.6;
+        text-align: center;
+    }
+
+    .float {
+        position: absolute;
+        font-size: 26px;
+        animation: balloon 4s ease-in infinite;
+    }
+
+    @keyframes balloon {
+        0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+        20% { opacity: 1; }
+        100% { transform: translateY(-10vh) scale(1.6); opacity: 0; }
+    }
+    </style>
+    </head>
+    <body>
+
+    <audio id="yesMusic" loop autoplay>
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=romantic-love-ambient-11066.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="container">
+        <div class="side">🌹 ✨ 💖</div>
+
+        <div class="poem">
+            In a world rushing past silent skies,<br><br>
+            I found something rare in your eyes.<br>
+            Not just beauty, not fleeting light,<br>
+            But a warmth that turned darkness bright.<br><br>
+            Like calm after storms, like stars above,<br>
+            You arrived softly, rewriting love.<br><br>
+            And if forever had one true meaning,<br>
+            It would be you — my heart’s quiet dreaming. 💜
+        </div>
+
+        <div class="side">💖 ✨ 🌹</div>
+    </div>
+
+    <script>
+    function floatItems() {
+        const el = document.createElement("div");
+        el.className = "float";
+        el.innerHTML = ["💖","🌹","✨"][Math.floor(Math.random()*3)];
+        el.style.left = Math.random()*100 + "vw";
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 4000);
+    }
+    setInterval(floatItems, 150);
+
+    // Optional: try to play on user gesture if autoplay is blocked
+    document.body.addEventListener('click', () => {
+        document.getElementById('yesMusic').play().catch(() => {});
+    }, {once: true});
+    <\/script>
+
+    </body>
+    </html>
+    `);
+}
+
+/* Ghost Scene */
+function ghostClick() {
+    const win = window.open("", "_blank");
+
+    win.document.write(`
+    <html>
+    <style>
+    body {
+        margin:0;
+        height:100vh;
+        background:black;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color:white;
+        font-family:Poppins;
+        overflow:hidden;
+    }
+    .ghost {
+        position:absolute;
+        font-size:30px;
+        animation:fly 3s linear infinite;
+    }
+    @keyframes fly {
+        from { transform: translateY(100vh); }
+        to { transform: translateY(-10vh); }
+    }
+    </style>
+    <body>
+        <h2>Please try Yes option 😌<br>Unable to ghost 👻</h2>
+        <script>
+        function ghostFly() {
+            const g = document.createElement("div");
+            g.className = "ghost";
+            g.innerHTML = "👻";
+            g.style.left = Math.random()*100 + "vw";
+            document.body.appendChild(g);
+            setTimeout(() => g.remove(), 3000);
+        }
+        setInterval(ghostFly, 220);
+        <\/script>
+    </body>
+    </html>
+    `);
+}
+
+/* No Troll 😏 */
+const noBtn = document.getElementById("noBtn");
+let stage = 0;
+
+function dodge() {
+    noBtn.style.transform =
+        `translate(${Math.random()*120-60}px, ${Math.random()*30}px)`;
+}
+
+noBtn.addEventListener("mouseover", dodge);
+
+noBtn.addEventListener("click", () => {
+    stage++;
+    if(stage===1) noBtn.innerText="Try Again 😌";
+    if(stage===2) noBtn.innerText="Still No? 🙈";
+    if(stage===3) noBtn.innerText="Try Yes Option 💜";
+    dodge();
+});
+      </script>
