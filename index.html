@@ -1,6 +1,20 @@
 <script>
 
+/* 🔓 Audio Unlock Trick (CRITICAL for phones) */
+
+document.addEventListener("click", () => {
+    const music = document.getElementById("music");
+
+    music.play().then(() => {
+        music.pause();
+        music.currentTime = 0;
+    }).catch(()=>{});
+
+}, { once:true });
+
+
 /* Atmosphere Glow */
+
 function createParticle() {
     const p = document.createElement("div");
     p.className = "particle";
@@ -11,6 +25,7 @@ function createParticle() {
 setInterval(createParticle, 100);
 
 /* Fireworks 🎆 */
+
 function fireworkBurst() {
     for(let i=0;i<25;i++) {
         const f = document.createElement("div");
@@ -28,6 +43,7 @@ function fireworkBurst() {
 }
 
 /* Floating Love */
+
 function floatLove() {
     const el = document.createElement("div");
     el.className = "float";
@@ -38,10 +54,21 @@ function floatLove() {
 }
 
 /* YES CLICK — FINAL BOSS 😌🔥 */
+
 function yesClick() {
 
-    // Play the romantic ambient music in the current window too (optional, already there)
-    document.getElementById("music").play();
+    const music = document.getElementById("music");
+
+    /* 🎵 Smooth Fade-In Effect */
+
+    music.volume = 0;
+    music.play().catch(()=>{});
+
+    let fade = setInterval(() => {
+        if (music.volume < 1) {
+            music.volume += 0.05;
+        } else clearInterval(fade);
+    }, 120);
 
     setInterval(floatLove, 120);
     setInterval(fireworkBurst, 900);
@@ -100,11 +127,6 @@ function yesClick() {
     </head>
     <body>
 
-    <audio id="yesMusic" loop autoplay>
-        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=romantic-love-ambient-11066.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-
     <div class="container">
         <div class="side">🌹 ✨ 💖</div>
 
@@ -132,11 +154,6 @@ function yesClick() {
         setTimeout(() => el.remove(), 4000);
     }
     setInterval(floatItems, 150);
-
-    // Optional: try to play on user gesture if autoplay is blocked
-    document.body.addEventListener('click', () => {
-        document.getElementById('yesMusic').play().catch(() => {});
-    }, {once: true});
     <\/script>
 
     </body>
@@ -145,6 +162,7 @@ function yesClick() {
 }
 
 /* Ghost Scene */
+
 function ghostClick() {
     const win = window.open("", "_blank");
 
@@ -191,6 +209,7 @@ function ghostClick() {
 }
 
 /* No Troll 😏 */
+
 const noBtn = document.getElementById("noBtn");
 let stage = 0;
 
@@ -208,4 +227,4 @@ noBtn.addEventListener("click", () => {
     if(stage===3) noBtn.innerText="Try Yes Option 💜";
     dodge();
 });
-      </script>
+</script>
